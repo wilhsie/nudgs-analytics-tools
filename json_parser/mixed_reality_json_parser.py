@@ -20,10 +20,13 @@ fd = open(sys.argv[1])
 
 # TODO: Handle case where line != type(JSON) i.e. line = # version:1
 
+list_of_player_data = []
+
 for line in fd:
     json_dump = json.dumps(line)
     json_load = json.loads(json_dump)
     json_reload = json.loads(json_load)
     if(json_reload['type'] == "action"):
-        print json_reload['data']['details'], json_reload['data']['client_time']
+        list_of_player_data.append([json_reload['data']['details'], json_reload['data']['client_time']])
 
+print list_of_player_data
