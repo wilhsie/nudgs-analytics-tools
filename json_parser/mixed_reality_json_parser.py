@@ -27,6 +27,8 @@ for line in fd:
     json_load = json.loads(json_dump)
     json_reload = json.loads(json_load)
     if(json_reload['type'] == "action"):
-        list_of_player_data.append([json_reload['data']['details'], json_reload['data']['client_time']])
+        player_action = json.dumps(json_reload['data']['details']['key'])
+        client_time = json.dumps(json_reload['data']['client_time'])
+        list_of_player_data.append([player_action, client_time])
 
 print list_of_player_data
