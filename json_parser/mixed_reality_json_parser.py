@@ -11,6 +11,9 @@
         List of (player action, client time)
 
 
+    byteify function:
+    http://stackoverflow.com/questions/956867/how-to-get-string-objects-instead-of-unicode-ones-from-json-in-python
+
 """
 
 import sys
