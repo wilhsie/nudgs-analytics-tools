@@ -16,19 +16,38 @@
 import sys
 import json
 
-fd = open(sys.argv[1])
-
 # TODO: Handle case where line != type(JSON) i.e. line = # version:1
 
-list_of_player_data = []
+def main():
+    list_of_player_data = []
+    fd = open(sys.argv[1])
 
-for line in fd:
-    json_dump = json.dumps(line)
-    json_load = json.loads(json_dump)
-    json_reload = json.loads(json_load)
-    if(json_reload['type'] == "action"):
-        player_action = json.dumps(json_reload['data']['details']['key'])
-        client_time = json.dumps(json_reload['data']['client_time'])
-        list_of_player_data.append([player_action, client_time])
+    for line in fd:
+        json_dump = json.dumps(line)
+	json_load = json.loads(line)
 
-print list_of_player_data
+	if(json_load['type'] == "action"):
+            player_action = byteify(json_load['data']['details']['key'])
+            client_time = byteify(json_load['data']['client_time'])
+            list_of_player_data.append([player_action, client_time])
+
+    print list_of_player_data
+
+
+
+###  Helper functions
+
+def byteify(input):
+    if isinstance(input, dict):
+        return {byteify(key):byteify(value) for key,value in input.iteritems()}
+    elif isinstance(input, list):
+        return [byteify(element) for element in input]
+    elif isinstance(input, unicode):
+        return input.encode('utf-8')
+    else:
+        return input
+
+
+if __name__ == '__main__':
+    main()
+
