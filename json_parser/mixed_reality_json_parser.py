@@ -20,6 +20,7 @@ import sys
 import json
 
 # TODO: Handle case where line != type(JSON) i.e. line = # version:1
+# TODO: Grab player name and score
 
 def main():
     list_of_player_data = []
