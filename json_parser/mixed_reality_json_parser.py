@@ -18,6 +18,7 @@
 
 import sys
 import json
+import sqlite3
 
 # TODO: Handle case where line != type(JSON) i.e. line = # version:1
 # TODO: Grab player name and score
@@ -51,7 +52,33 @@ def byteify(input):
     else:
         return input
 
+def send_to_db(player_id, list_of_player_action_timestamps, final_score):
+    sql_connect = sqlite.connect('connect_to.db')
+
+    my_cursor = sql_connect.cursor()    
+
+    for pair in list_of_player_action_timestamps:
+        my_cursor.execute("sql statement goes here")
+        my_cursor.commit()
+
+    my_cursor.close()
+
 
 if __name__ == '__main__':
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
